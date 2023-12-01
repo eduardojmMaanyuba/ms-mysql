@@ -18,6 +18,12 @@ public class UserService {
 
     private final UserRepository userRepository;
 
+    public User getUserFromMail(String mail) {
+        return userRepository.findUserByMail(mail).orElseThrow(
+                () -> new RuntimeException("User not found.")
+        );
+    }
+
     public GenericResponse createUser(UserDto userDto) {
         try {
             if (userDto.getPhone() == null || userDto.getPhone().isEmpty()) {
